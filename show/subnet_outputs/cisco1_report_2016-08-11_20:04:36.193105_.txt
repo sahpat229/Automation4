@@ -1,0 +1,4 @@
+Name                         Address                 Mask                   ID                              Description
+FastEthernet0/0        192.168.128.2        255.255.255.0        192.168.128.0                                         
+FastEthernet1/0         192.168.56.2        255.255.255.0         192.168.56.0                                         
+Loopback0                    1.1.1.1        255.255.255.0              1.1.1.0                                         

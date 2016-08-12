@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css"/>
+
+
+<html lang="en"><head>
+	{% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="/static/jquery/jquery.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="/static/bootstrap-3.3.7-dist/js//bootstrap.min.js"></script>
+	<style>
+
+	.navbar-default .navbar-fixed-top {
+		background-color: #900C3F;
+	}
+
+/*	#hostname {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+	/*#hostname:focus {
+	    width: 100%;
+	}*/
+	body {
+  		padding : 10px ;
+  
+	}
+
+	#exTab1 .tab-content {
+	  color : white;
+	  background-color: #428bca;
+	  padding : 5px 15px;
+	}
+
+	#exTab2 h3 {
+	  color : white;
+	  background-color: #428bca;
+	  padding : 5px 15px;
+	}
+
+	/* remove border radius for the tab */
+
+	#exTab1 .nav-pills > li > a {
+	  border-radius: 0;
+	}
+
+	/* change border radius for the tab , apply corners on top*/
+
+	#exTab3 .nav-pills > li > a {
+	  border-radius: 4px 4px 0 0 ;
+	}
+
+	#exTab3 .tab-content {
+	  color : white;
+	  background-color: #428bca;
+	  padding : 5px 15px;
+	}
+
+	.user_item {
+
+		color: red;
+	}
+
+	.delete {
+		float:right;
+	}
+
+	.user_delete {
+
+	}
+
+	.file_item {
+		color: red;
+	}
+
+	.host_item {
+		color: red;
+	}
+
+	</style>
+	<script>
+	/* ============================================================
+	 * bootstrap-dropdown.js v2.0.1
+	 * http://twitter.github.com/bootstrap/javascript.html#dropdowns
+	 * ============================================================
+	 * Copyright 2012 Twitter, Inc.
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 * ============================================================ */
+
+
+	!function( $ ){
+
+	  "use strict"
+
+	 /* DROPDOWN CLASS DEFINITION
+	  * ========================= */
+
+	  var toggle = '[data-toggle="dropdown"]'
+	    , Dropdown = function ( element ) {
+	        var $el = $(element).on('click.dropdown.data-api', this.toggle)
+	        $('html').on('click.dropdown.data-api', function () {
+	          $el.parent().removeClass('open')
+	        })
+	      }
+
+	  Dropdown.prototype = {
+
+	    constructor: Dropdown
+
+	  , toggle: function ( e ) {
+	      var $this = $(this)
+	        , selector = $this.attr('data-target')
+	        , $parent
+	        , isActive
+
+	      if (!selector) {
+	        selector = $this.attr('href')
+	        selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
+	      }
+
+	      $parent = $(selector)
+	      $parent.length || ($parent = $this.parent())
+
+	      isActive = $parent.hasClass('open')
+
+	      clearMenus()
+	      !isActive && $parent.toggleClass('open')
+
+	      return false
+	    }
+
+	  }
+
+	  function clearMenus() {
+	    $(toggle).parent().removeClass('open')
+	  }
+
+
+	  /* DROPDOWN PLUGIN DEFINITION
+	   * ========================== */
+
+	  $.fn.dropdown = function ( option ) {
+	    return this.each(function () {
+	      var $this = $(this)
+	        , data = $this.data('dropdown')
+	      if (!data) $this.data('dropdown', (data = new Dropdown(this)))
+	      if (typeof option == 'string') data[option].call($this)
+	    })
+	  }
+
+	  $.fn.dropdown.Constructor = Dropdown
+
+
+	  /* APPLY TO STANDARD DROPDOWN ELEMENTS
+	   * =================================== */
+
+	  $(function () {
+	    $('html').on('click.dropdown.data-api', clearMenus)
+	    $('body').on('click.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+	  })
+
+	}( window.jQuery );
+	</script>
+
+    <title>Admin tools</title>
+
+
+  </head>
+
+  <body>
+	<!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- <a class="navbar-brand" href="#">Networking Webtools</a> -->
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'show:list' %}">Home</a></li>
+            <!-- <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li> -->
+            <li><a href="{% url 'show:admin_page' %}">Admin Page</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'show:show' %}">Output Repository</a></li>
+                <li><a href="{% url 'show:compare_run' %}">Compare Previous Outputs</a></li>
+                <li><a href="{% url 'show:subnet_outputs' %}">Generate Subnet Outputs</a></li>
+                <li><a href="{% url 'show:subnet_compare' %}">Subnet Locator</a></li>
+                <li><a href="{% url 'show:topology_mapper' %}">Topology Mapper</a></li>
+                <li><a href="{% url 'show:ports' %}">Port Utilization</a></li>
+                <!-- <li><a href="#">Subnet Locator</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li> -->
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'show:logout_view' %}">Logout</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    </div>
+    <div class="container">
+
+      <!-- Main component for a primary marketing message or call to action -->
+    	<div class="jumbotron" style="position :relative">
+    		<div id="loadingDiv" style="z-index:10; position:absolute; width:100%; height:100%; top:0; left:0;">
+    			<img src="/static/ajax-loader.gif"/>
+    		</div>
+	        <h1>Admin Page</h1>
+	        <div class="row">
+	        	<div class="col-md-12" id="left_container">
+					<div id="exTab1" class="container">	
+						<ul class="nav nav-pills">
+							<li class="active tab-item">
+					        <a  href="#1a" data-toggle="tab">Users</a>
+							</li>
+							<li class="tab-item"><a href="#2a" data-toggle="tab">CLI-Files</a>
+							</li>
+							<li class="tab-item"><a href="#3a" data-toggle="tab">Hostfiles</a>
+							</li>
+							<!-- <li class="tab-item"><a href="#4a" data-toggle="tab">AutoGen</a>
+							</li> -->
+						</ul>
+						<div class="tab-content clearfix">
+							<div class="tab-pane active" id="1a">
+					          	<h3>Current users: </h3>
+					          	<ul class="list-group" id="username_list">
+					          		{% for username in username_list %}
+						          		<li class="list-group-item user_item">{{ username }}
+						          		<span class="pull-right user_delete" id="{{ username }}">Delete</span></li>
+						          	{% endfor %}
+					          	</ul>
+					          	<button type="button" class="btn btn-info" id="user_create">Create</button>
+					          	<small class="text-muted" id="create_delete_msg" style="visibility:hidden"></small>
+							</div>
+							<div class="tab-pane" id="2a">
+								<h3>CLI-Files: </h3>
+					          	<ul class="list-group" id="filename_list">
+					          		{% for textfile in textfiles_list %}
+						          		<li class="list-group-item file_item">{{ textfile }}
+						          		<span class="pull-right file_delete" id="{{ textfile }}">Delete</span>
+						          		</li>
+						          	{% endfor %}
+					          	</ul>
+					          	<button type="button" class="btn btn-info" id="file_create">Create</button>
+					          	<small class="text-muted" id="file_open_err_msg" style="visibility:hidden background:white"></small>
+							</div>
+					        <div class="tab-pane" id="3a">
+					        	<h3>Hostfiles: </h3>
+					        	<ul class="list-group" id="host_list">
+					          		{% for hostfile in hostfiles_list %}
+						          		<li class="list-group-item host_item">{{ hostfile }}
+						          		<span class="pull-right host_delete" id="{{ hostfile }}">Delete</span>
+						          		</li>
+						          	{% endfor %}
+					          	</ul>
+					          	<button type="button" class="btn btn-info" id="host_create">Create</button>
+					          	<small class="text-muted" id="host_open_err_msg" style="visibility:hidden background:white"></small>
+							</div>
+					        <!-- <div class="tab-pane" id="4a">
+					          	<h3> Subnet Output Automatic Generation: </h3>
+					          	<div class="row">
+					          		<div class = "col-md-6">
+					          			<div class="input-group">
+					          				<label for="daily" >Daily subnet generation?</label>
+					          				{% if autobool %}
+					          				<input type="checkbox" id="daily" checked>
+					          				{% else %}
+					          				<input type="checkbox" id="daily">
+					          				{% endif %}
+					          			</div>
+					          		</div>
+					          		<div class="col-md-3">
+					          			<div class="input-group">
+					          				<label for="hour">Hour</label>
+					          				<input type="text" id="hour" style="color:red" value="{{ autohour }}">
+					          			</div>
+					          			<div class="input-group">
+					          				<label for="minute" >Minute</label>
+					          				<input type="text" id="minute" style="color:red" value="{{ automin }}">
+					          			</div>
+					          			
+					          		</div>
+					          		<div class="col-md-3">
+					          			<div class="input-group">
+					          				<label for ="adminusername" >Username</label>
+					          				<input type="text" id="adminusername" style="color:red">
+					          			</div>					          			
+					          			<div class="input-group">
+					          				<label for ="adminpassword">Password</label>
+					          				<input type="password" id="adminpassword" style="color:red">
+					          			</div>
+					          		</div>
+					          		
+					          	</div>
+					          	<small class="text-muted" style="color:red">Military Time</small>
+					          	<button type="button" class="btn btn-warning" id="autosubmit">Submit</button>
+					        </div> -->
+					    </div>
+					          	
+					</div>
+				</div>
+			  	<div class="col-md-7 info-container" style="display:none" id="user_container">
+			  		<div class="container">
+				  		<form action="{% url 'show:show'}" method="POST" id="form2" name="selectionForm">
+			    		{% csrf_token %}
+				    		<fieldset class="form-group">
+						    	<label for="username">Username</label>
+						    	<input type="text" class="form-control form2input" id="username" placeholder="Enter username" autocomplete="off">
+						    	<small class="text-muted" id="user_err-msg" style="visibility:hidden"></small>
+						  	</fieldset>
+							<fieldset class="form-group">
+								<label for="first_name">First Name</label>
+						    	<input type="text" class="form-control" id="first_name" placeholder="Enter First name" autocomplete="off">
+							</fieldset>
+							<fieldset class="form-group">
+								<label for="last_name">Last Name</label>
+						    	<input type="text" class="form-control" id="last_name" placeholder="Enter Last name" autocomplete="off">
+							</fieldset>
+							<fieldset class="form-group">
+								<label for="email">Email</label>
+						    	<input type="text" class="form-control" id="email" placeholder="Enter email" autocomplete="off">
+							</fieldset>
+						  	<fieldset class="form-group">
+						   	 	<label for="password">Password</label>
+						   	 	<input type="password" class="form-control" id="password" placeholder="User password">
+							</fieldset>
+				    		<fieldset class="form-group">
+						    	<label for="privilege">Privilege Selection</label>
+						    	<select class="form-control" id="privilege" name="selectValues">
+						    		<option selected disabled></option>
+						    		<option>User</option>
+						    		<option>Admin</option>
+						   		</select>
+							</fieldset>
+						  	<button id="usersubmit" type="submit" a="_blank">Submit</button>
+						  	<small class="text-muted" id="error_msg" style="visibility:hidden"></small>
+			    		</form>
+			  		</div>
+			  	</div>
+			  	<div class="col-md-7 info-container" style="display:none" id="file_container">
+			  		<div class="container">
+				  		<form action="{% url 'show:show'}" method="POST" id="form3" name="selectionForm">
+			    		{% csrf_token %}
+				    		<fieldset class="form-group">
+						    	<label for="filename">File Name</label>
+						    	<input type="text" class="form-control" id="filename" autocomplete="off">
+						    	<small class="text-muted" id="file_err_msg" style="visibility:hidden"></small>
+						  	</fieldset>
+							<fieldset class="form-group">
+								<label for="os_type">OS Type</label>
+						    	<select class="form-control" id="os_type" name="selectValues">
+						    		<option id="IOS">IOS</option>
+						    		<option id="NXOS">NXOS</option>
+						   		</select>
+							</fieldset>
+							<fieldset class="form-group">
+								<label for="function">Function Type</label>
+						    	<select class="form-control" id="function" name="selectValues">
+						    		<option id="CORE">CORE</option>
+						    		<option id="DIST">DIST</option>
+						    		<option id="ACCESS">ACCESS</option>
+						      		<option id="OTV">OTV</option>
+						      		<option id="WAN">WAN</option>
+						      		<option id="VXLAN">VXLAN</option>
+						   		</select>
+							</fieldset>
+							<fieldset class="form-group">
+								<label for="commands">Commands</label>
+						    	<textarea class="form-control" id="commands" autocomplete="off" rows="6"></textarea>
+							</fieldset>
+						  	<button id="filesubmit" type="submit" a="_blank">Submit</button>
+						  	<small class="text-muted" id="file_error_msg" style="visibility:hidden"></small>
+			    		</form>
+			  		</div>
+	  			</div>
+	  			<div class="col-md-7 info-contaiiner" style="display:none" id="host_container">
+			  		<div class="container">
+				  		<form action="{% url 'show:show'}" method="POST" id="form4" name="selectionForm">
+			    		{% csrf_token %}
+				    		<fieldset class="form-group">
+						    	<label for="hostfilename">File Name</label>
+						    	<input type="text" class="form-control" id="host_filename" autocomplete="off">
+						    	<small class="text-muted" id="host_err_msg" style="visibility:hidden"></small>
+						  	</fieldset>
+							<fieldset class="form-group">
+								<label for="host_os_type">OS Type</label>
+						    	<select class="form-control" id="host_os_type" name="selectValues">
+						    		<option id="IOS">IOS</option>
+						    		<option id="NXOS">NXOS</option>
+						   		</select>
+							</fieldset>
+							<fieldset class="form-group">
+								<label for="host_function">Function Type</label>
+						    	<select class="form-control" id="host_function" name="selectValues">
+						    		<option id="CORE">CORE</option>
+						    		<option id="DIST">DIST</option>
+						    		<option id="ACCESS">ACCESS</option>
+						      		<option id="OTV">OTV</option>
+						      		<option id="WAN">WAN</option>
+						      		<option id="VXLAN">VXLAN</option>
+						   		</select>
+							</fieldset>
+							<fieldset class="form-group">
+								<label for="hosts">Hosts</label>
+						    	<textarea class="form-control" id="hosts" autocomplete="off" rows="6"></textarea>
+							</fieldset>
+						  	<button id="host_submit" type="submit" a="_blank">Submit</button>
+						  	<small class="text-muted" id="host_error_msg" style="visibility:hidden"></small>
+			    		</form>
+			  		</div>
+	  			</div>
+   			</div>
+
+   	</div>
+     <!-- /container -->
+    <script>
+
+     	$(document).ready(function (){
+
+     		var $loading = $('#loadingDiv').hide();
+
+     		$(document)
+     			.ajaxStart(function() {
+     				$loading.show();
+     			})
+     			.ajaxStop(function () {
+     				$loading.hide();
+     			});
+
+     		/*
+     		get a corresponding cookie, used for getting the csrftoken cookie that Django uses
+     		*/
+			function getCookie(name) {
+			    var cookieValue = null;
+			    if (document.cookie && document.cookie != '') {
+			        var cookies = document.cookie.split(';');
+			        for (var i = 0; i < cookies.length; i++) {
+			            var cookie = jQuery.trim(cookies[i]);
+			            // Does this cookie string begin with the name we want?
+			            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+			                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+			                break;
+			            }
+			        }
+			    }
+			    return cookieValue;
+			}
+			var type = "";
+
+			var csrftoken = getCookie('csrftoken');
+			// Need to remember the original usernames, filenames, and hostfilenames
+			var username = "";
+			var orig_filename = "";
+			var orig_hostfilename = "";
+
+			// on a tab item click, the containers should all disappear and the remembrance of original variables should disappear
+			$(".tab-item").click(function() {
+				$("#left_container").removeClass().addClass("col-md-12");
+				$("#user_container").css("display", "none");
+				$("#file_container").css("display", "none");
+				$("#host_container").css('display', 'none');
+				$(".form-control").each(function(){
+					$(this).val("");
+				});
+				type = "";
+				username = "";
+				orig_filename = "";
+				orig_hostfilename = "";
+			});
+
+			//each user item is the element in the white list that appears after u click on the 
+			// Users tab.
+			function makeUserItemClick(){
+
+				//set click event for a user item
+	    		$(".user_item").click(function(event)
+	    		{
+	    			//make the left_container smaller
+	    			$("#left_container").removeClass("col-md-12").addClass("col-md-5");
+	    			//for each form-control item set the value to blank
+	    			$(".form-control").each(function(){
+						$(this).val("");
+					});
+					//display the user_container
+	    			$("#user_container").css("display", "block");
+	    			//on a click gather the user information
+	    			var user_selection = $(event.target).clone().children().remove().end().text();
+	    			console.log(user_selection);
+	    			var url_th = "{% url 'show:admin_page' %}";
+	    			var formData = {
+	    				'user_selection': user_selection.trim(),
+	    			}
+	    			type = "none";
+	    			$.ajaxSetup({
+					    crossDomain: false, // obviates need for sameOrigin test
+					    beforeSend: function(xhr, settings) {
+					        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+					    }
+					});
+	    			//ajax post with appropriate form data for the server to interpret
+					$.ajax({
+						url: url_th,
+						type: "POST",
+						data: formData,
+						success: function(response){
+							console.log(response);
+							username = response['username'];
+							var first_name = response['first_name'];
+							var last_name = response['last_name'];
+							var email = response['email'];
+							var is_superuser = response['is_superuser'];
+							var last_login = response['last_login'];
+							var date_joined = response['date_joined'];
+							$('#username').val(username);
+							$('#first_name').val(first_name);
+							$('#last_name').val(last_name);
+							$('#email').val(email);
+							
+							//on success, make the new html data clickable
+							makeUserDeleteClick();
+						},
+					});
+	    		});
+	    	}
+	    	makeUserItemClick();
+
+
+	    	//make the Delete items clickable in the User lists
+	    	function makeUserDeleteClick(){
+	    		$(".user_delete").click(function(event){
+	    			//on a Delete click, set all the form values to blank
+	    			$(".form-control").each(function() {
+						$(this).val("");
+					});
+					type = "";
+					username = "";
+	    			var url_th = "{% url 'show:admin_page' %}";
+	    			$.ajaxSetup({
+					    crossDomain: false, // obviates need for sameOrigin test
+					    beforeSend: function(xhr, settings) {
+					        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+					    }
+					});
+
+					var formData = {
+						'user_delete' : $(event.target).attr("id"),
+					}
+
+					//ajaxPost appropriate formData
+					$.ajax({
+						url: url_th,
+						type: "POST",
+						data: formData,
+						success: function(response){
+							//on sucess set the appropriate html for the list and make everything clickable
+							if ('success' in response){
+								$("#create_delete_msg").html(response['success']);
+								var username_list = response['username_list'];
+								$("#username_list").html("");
+								var username_list_innerHTML = ""
+								//reset elements in the list of all user items with appropriate delete elements
+								for (var x = 0; x < username_list.length; x++)
+								{
+									username_list_innerHTML += '<li class="list-group-item user_item">'+
+										username_list[x] + '<span class="pull-right user_delete" id="' +
+										username_list[x] +'">Delete</span></li>';
+								}
+								document.getElementById("username_list").innerHTML = username_list_innerHTML;
+							}
+							else {
+								$("#create_delete_msg").html(response['err']);
+							}
+							//make all the HTML for User Items and the Delete button for Users clickable
+							makeUserItemClick();
+							makeUserDeleteClick();
+						},
+					});
+
+					event.preventDefault();
+
+	    		});
+	    	}
+	    	//Initially make all the Deletes clickable
+	    	makeUserDeleteClick();
+
+	    	//set the functionality for the user_create button, which just sets the type to create
+    		$("#user_create").click(function(event){
+    			username = "";
+    			//make the left_container small, and set the value for each of the form elements to ""
+    			$("#left_container").removeClass("col-md-12").addClass("col-md-5");
+    			$(".form-control").each(function() {
+					$(this).val("");
+				});
+				$("#user_container").css("display", "block");
+				$(".form-control").removeAttr("placeholder");
+				/* set the type variable to create so that the server can recognize that it needs to make
+				a new user*/
+				type = "create";
+
+    		});
+
+    		//set the click event for the usersubmit button
+    		$("#usersubmit").click(function(event) {
+    			var url_th = "{% url 'show:admin_page' %}";
+    			var formData = {
+    				'username': $('#username').val(),
+    				'first_name': $('#first_name').val(),
+    				'last_name' : $('#last_name').val(),
+    				'email' : $('#email').val(),
+    				'password' : $('#password').val(),
+    				'privilege': $('#privilege').val(),
+    				'original' : username,
+    				'type' : type,
+
+    			};
+
+    			//define the UserSubmitAjax() function for later usage in determining case by case basis
+    			function UserSubmitAjax(){
+    				console.log("Submitted");
+	    			$.ajaxSetup({
+					    crossDomain: false, // obviates need for sameOrigin test
+					    beforeSend: function(xhr, settings) {
+					        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+					    }
+					});
+
+	    			//post formData and parse the result, changing the list of Users
+					$.ajax({
+						url: url_th,
+						type: "POST",
+						data: formData,
+						success: function(response){
+							console.log(response);
+							if ('err' in response)
+							{
+								var err_msg = response['err'];
+								$("#error_msg").html(err_msg);
+								$("#error_msg").css("visibility", "visible");
+							}
+							else
+							{
+								var success_msg = response['success'];
+								$("#error_msg").html(success_msg);
+								$("#error_msg").css("visibility", "visible");
+								var username_list = response['username_list'];
+								$("#username_list").html("");
+								var username_list_innerHTML = ""
+								//changing of the list of Users
+								for (var x = 0; x < username_list.length; x++)
+								{
+									username_list_innerHTML += '<li class="list-group-item user_item">'+
+										username_list[x] + '<span class="pull-right user_delete" id="' +
+										username_list[x] +'">Delete</span></li>';
+								}
+								document.getElementById("username_list").innerHTML = username_list_innerHTML;
+								makeUserItemClick();
+								makeUserDeleteClick();
+							}
+						},
+
+					});
+    			}
+    			//tests that the password is alphanumeric
+    			var re = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
+
+    			//test for proper user form input
+    			/*
+    			If user should be an Admin, check that the username isn't blank, the email isn't blank,
+    			and that the password is alphanumeric
+    			*/
+    			if (formData['privilege'] == "Admin")
+    			{
+    				if ((formData['username'] == "") || (formData['email'] == "") || 
+    				!(re.test(formData['password'])))
+    				{
+    					console.log("Admin problem");
+    					$("#error_msg").html("Please input a username, email, and password with at least one letter and one number");
+    					$("#error_msg").css("visibility", "visible");
+    				}
+    				else {
+    					$("#error_msg").css('visibility', 'hidden');
+    					console.log("Admin success");
+    					UserSubmitAjax();
+    				}
+
+    			}
+
+    			/*
+    			If the user should be an admin, check that the username isn't blank, the email isn't blank,
+    			and that the password isn't blank
+    			*/
+
+    			else if (formData['privilege'] == "User"){
+    				if ((formData['username'] == "") || (formData['email'] == "") || 
+    					(formData['password'] == ""))
+    				{
+    					console.log("Admin problem");
+    					$("#error_msg").html("Please input a username, email, password, and privilege");
+    					$("#error_msg").css("visibility", "visible");
+    				}
+    				else {
+    					$("#error_msg").css('visibility', 'hidden');
+    					console.log("Admin success");
+    					UserSubmitAjax();
+    				}
+    			}
+
+    			/*
+    			If no user type was selected, return an error
+    			*/
+    			else {
+    				$("#error_msg").html("Please input a username, email, password, and privilege");
+    				$("#error_msg").css("visibility", 'visibile');
+    			}
+
+				event.preventDefault();
+    		});
+
+    		var original_file = "";
+
+    		//make the file items in the list of files clickable
+    		function makeFileItemClick(){
+    			$(".file_item").click(function(event){
+    				// if ($(event.target).hasClass('.file_delete')) return;
+    				/*
+    				Make the left container small, set the form values to blank, make all the error messages
+    				blank
+    				*/
+    				console.log($(event.target).attr("class"));
+	    			$("#file_error_msg").css("visibility", "hidden").val("");
+	    			$("#file_open_err_msg").css("visibility", "hidden").val("");
+	    			$("#left_container").removeClass("col-md-12").addClass("col-md-5");
+	    			$(".form-control").each(function(){
+						$(this).val("");
+					});
+	    			$("#file_container").css("display", "block");
+
+	    			//get the filename that was clicked
+	    			var file_selection = $(event.target).clone().children().remove().end().text();
+
+	    			var url_th = "{% url 'show:admin_page' %}";
+	    			//set the type to file_submit so that the server knows a current file is being changed
+	    			type = "file_submit";
+	    			var formData = {
+	    				'file_selection': file_selection.trim(),
+	    			}
+	    			
+	    			$.ajaxSetup({
+					    crossDomain: false, // obviates need for sameOrigin test
+					    beforeSend: function(xhr, settings) {
+					        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+					    }
+					});
+
+	    			/*
+	    			Post the formData, and set all the form fields to the fields in the database
+	    			that correspond to the TextFile item that was selected
+	    			*/
+					$.ajax({
+						url: url_th,
+						type: "POST",
+						data: formData,
+						success: function(response){
+							console.log(response);
+							if ('file_open_err' in response){
+
+								$("#file_open_err_msg").html(response['file_open_err']);
+							}
+							else {
+								$("#commands").val(response['file_contents']);
+								$("#os_type").val(response['os']);
+								$("#function").val(response['func']);
+								$("#filename").val(response['file_name']);
+								original_file = response['file_name'];
+														
+							}
+
+
+						},
+					});
+					event.preventDefault();
+    			});
+    		}
+    		
+    		//Execute the function so that all the TextFile items are initially clickable
+    		makeFileItemClick();
+
+    		//make the file "Delete" textboxes clickable
+    		function makeFileDeleteClick(){
+    			//Setting of the click event for the Delete boxes in the TextFile list
+	    		$(".file_delete").click(function(event) {
+	    			//console.log("File delete clicked");
+	    			original_file = "";
+	    			/*
+	    			set the type variable to file_delete so that the server knows it should delete a
+	    			TextFile instance
+	    			*/
+	    			type = "file_delete";
+	    			//Set each of the form values to blank on a delete click
+	    			$(".form-control").each(function(){
+						$(this).val("");
+					});
+
+					$.ajaxSetup({
+					    crossDomain: false, // obviates need for sameOrigin test
+					    beforeSend: function(xhr, settings) {
+					        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+					    }
+					});
+
+					var formData = {
+						'file_delete' : $(event.target).attr("id"),
+						'type' : type
+					};
+
+					/*
+					Post the data and update the list of TextFile items
+
+					*/
+					var url_th = "{% url 'show:admin_page' %}";
+					$.ajax({
+						url: url_th,
+						type: "POST",
+						data: formData,
+						success: function(response){
+							console.log(response);
+
+							$("#file_error_msg").css("visibility", "visible");
+							$("#file_error_msg").html(response['file_open_err']);
+							/*
+							Receives a list of all TextFile item names after the delte
+							*/
+							var filename_list = response['list_of_file_names'];
+							$("#filename_list").html("");
+							var filename_list_innerHTML = ""
+							/*
+							Generates and sets the HTML for the list of TextFile names and Delete buttons
+							*/
+							for (var x = 0; x < filename_list.length; x++)
+							{
+								filename_list_innerHTML += '<li class="list-group-item file_item">'+
+									filename_list[x] + '<span class="pull-right file_delete" id="' +
+									filename_list[x] +'">Delete</span></li>';
+							}
+							document.getElementById("filename_list").innerHTML = filename_list_innerHTML;
+							/*
+							Make all the TextFile names and Delete buttons clickable
+							*/
+							makeFileItemClick();
+							makeFileDeleteClick();
+						},
+					});
+					
+	    		});
+	    	}
+	    	/*
+	    	Make all the File Delete buttons clickable initially
+	    	*/
+	    	makeFileDeleteClick();
+
+	    	//set submit button functionality
+    		$("#filesubmit").click(function(event){
+    			var url_th = "{% url 'show:admin_page' %}";
+    			$.ajaxSetup({
+				    crossDomain: false, // obviates need for sameOrigin test
+				    beforeSend: function(xhr, settings) {
+				        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+				    }
+				});
+
+    			var formData = {
+    				'file_name' : $("#filename").val(),
+    				'os_type' : $("#os_type").val(),
+    				'function' : $("#function").val(),
+    				'commands' : $("#commands").val(),
+    				'type' : type,
+    				'original_text_file' : original_file,
+    			}
+    			
+    			//check if the user inputted in valid data
+    			if ((formData['file_name'] == "") || (formData['commands'] == ""))
+    			{
+    				$("#file_error_msg").css('visibility', 'visible');
+    				$("#file_error_msg").html("Please input a file name and commands")
+    			}
+
+    			else {
+    				//submit the form data, set new list items through the list html, and
+    				//remake file items and file delete text boxes and make them clickable
+    				console.log("Submitting");
+    				$.ajax({
+						url: url_th,
+						type: "POST",
+						data: formData,
+						success: function(response){
+							console.log(response);
+
+							$("#file_error_msg").css("visibility", "visible");
+							$("#file_error_msg").html(response['file_open_err']);
+							if ('list_of_file_names' in response){
+								var filename_list = response['list_of_file_names'];
+								$("#filename_list").html("");
+								var filename_list_innerHTML = ""
+								/*
+								Sets the HTML to update the list of TextFile names and Delete buttons
+								*/
+								for (var x = 0; x < filename_list.length; x++)
+								{
+									filename_list_innerHTML += '<li class="list-group-item file_item">'+
+										filename_list[x] + '<span class="pull-right file_delete" id="' +
+										filename_list[x] +'">Delete</span></li>';
+								}
+								document.getElementById("filename_list").innerHTML = filename_list_innerHTML;
+								/*
+								Make the TextFile names and Delete buttons clickable
+								*/
+								makeFileItemClick();
+								makeFileDeleteClick();
+
+							}
+							else {
+
+							}
+						},
+					});
+    			}
+
+    			
+    			event.preventDefault();
+    		});
+
+    		//set the create button for files to be clickable
+    		$("#file_create").click(function(event) {
+    			original_file = "";
+    			type = "file_create";
+
+
+    			$("#file_error_msg").css("visibility", "hidden").val("");
+    			$("#file_open_err_msg").css("visibility", "hidden").val("");
+    			$("#left_container").removeClass("col-md-12").addClass("col-md-5");
+    			$(".form-control").each(function(){
+					$(this).val("");
+				});
+    			$("#file_container").css("display", "block");
+    			$.ajaxSetup({
+				    crossDomain: false, // obviates need for sameOrigin test
+				    beforeSend: function(xhr, settings) {
+				        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+				    }
+				});
+
+    			event.preventDefault();
+    		});
+    		/*
+    		EVERYTHING BELOW IS FOR HOSTFILES
+    		EVERYTHING BELOW FOR HOSTFILES IS THE SAME AS TEXTFILES, WITH JQUERY SELECTORS
+    		SET FOR THE HOSTFILE HTML ELEMENTS RATHER THAN THE TEXTFILE HTML ELEMENTS
+    		*/
+
+    		var original_hostfile = "";
+
+
+    		//make the HostFile items clickable
+			function makeHostFileItemClick(){
+    			$(".host_item").click(function(event){
+    				// if ($(event.target).hasClass('.file_delete')) return;
+    				console.log($(event.target).attr("class"));
+	    			$("#host_error_msg").css("visibility", "hidden").val("");
+	    			$("#host_open_err_msg").css("visibility", "hidden").val("");
+	    			$("#left_container").removeClass("col-md-12").addClass("col-md-5");
+	    			$(".form-control").each(function(){
+						$(this).val("");
+					});
+	    			$("#host_container").css("display", "block");
+	    			//store the selection text for posting later on
+	    			var host_selection = $(event.target).clone().children().remove().end().text();
+	    			var url_th = "{% url 'show:admin_page' %}";
+	    			type = "host_submit";
+	    			var formData = {
+	    				'host_selection': host_selection.trim(),
+	    				'type' : type,
+	    			}
+	    			
+	    			$.ajaxSetup({
+					    crossDomain: false, // obviates need for sameOrigin test
+					    beforeSend: function(xhr, settings) {
+					        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+					    }
+					});
+
+					$.ajax({
+						url: url_th,
+						type: "POST",
+						data: formData,
+						success: function(response){
+							console.log(response);
+							if ('host_open_err' in response){
+
+								$("#host_open_err_msg").html(response['host_open_err']);
+							}
+							else {
+								$("#hosts").val(response['host_contents']);
+								$("#host_os_type").val(response['os']);
+								$("#host_function").val(response['func']);
+								$("#host_filename").val(response['file_name']);
+								original_hostfile = response['file_name'];
+														
+							}
+
+
+						},
+					});
+					event.preventDefault();
+    			});
+    		}
+    		
+    		makeHostFileItemClick();
+
+    		//make the Host Delete text boxes clickable
+    		function makeHostFileDeleteClick(){
+	    		$(".host_delete").click(function(event) {
+	    			console.log("HostFile delete clicked");
+	    			original_hostfile = "";
+	    			type = "host_delete";
+	    			$(".form-control").each(function(){
+						$(this).val("");
+					});
+
+					$.ajaxSetup({
+					    crossDomain: false, // obviates need for sameOrigin test
+					    beforeSend: function(xhr, settings) {
+					        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+					    }
+					});
+
+					var formData = {
+						'host_delete' : $(event.target).attr("id"),
+						'type' : type
+					};
+
+					var url_th = "{% url 'show:admin_page' %}";
+					$.ajax({
+						url: url_th,
+						type: "POST",
+						data: formData,
+						success: function(response){
+							console.log(response);
+
+							$("#host_error_msg").css("visibility", "visible");
+							$("#host_error_msg").html(response['host_open_err']);
+							var filename_list = response['list_of_file_names'];
+							$("#host_list").html("");
+							var filename_list_innerHTML = ""
+							for (var x = 0; x < filename_list.length; x++)
+							{
+								filename_list_innerHTML += '<li class="list-group-item host_item">'+
+									filename_list[x] + '<span class="pull-right host_delete" id="' +
+									filename_list[x] +'">Delete</span></li>';
+							}
+							document.getElementById("host_list").innerHTML = filename_list_innerHTML;
+							makeHostFileItemClick();
+							makeHostFileDeleteClick();
+						},
+					});
+					
+	    		});
+	    	}
+
+	    	makeHostFileDeleteClick();
+
+    		$("#host_submit").click(function(event){
+    			var url_th = "{% url 'show:admin_page' %}";
+    			$.ajaxSetup({
+				    crossDomain: false, // obviates need for sameOrigin test
+				    beforeSend: function(xhr, settings) {
+				        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+				    }
+				});
+
+
+    			var formData = {
+    				'host_file_name' : $("#host_filename").val(),
+    				'os_type' : $("#host_os_type").val(),
+    				'function' : $("#host_function").val(),
+    				'hosts' : $("#hosts").val(),
+    				'type' : type,
+    				'original_host_file' : original_hostfile,
+    			}
+    			//original_hostfile = $("#host_filename").val();
+    			console.log(formData);
+    			
+    			$.ajax({
+					url: url_th,
+					type: "POST",
+					data: formData,
+					success: function(response){
+						console.log(response);
+
+						original_hostfile = response['orig_name'];
+
+						$("#host_error_msg").css("visibility", "visible");
+						$("#host_error_msg").html(response['host_open_err']);
+						if ('list_of_file_names' in response){
+							var filename_list = response['list_of_file_names'];
+							$("#host_list").html("");
+							var filename_list_innerHTML = ""
+							for (var x = 0; x < filename_list.length; x++)
+							{
+								filename_list_innerHTML += '<li class="list-group-item host_item">'+
+									filename_list[x] + '<span class="pull-right host_delete" id="' +
+									filename_list[x] +'">Delete</span></li>';
+							}
+							document.getElementById("host_list").innerHTML = filename_list_innerHTML;
+							makeHostFileItemClick();
+							makeHostFileDeleteClick();
+
+						}
+						else {
+
+						}
+					},
+				});
+    			event.preventDefault();
+    		});
+
+    		$("#host_create").click(function(event) {
+    			original_hostfile = "";
+    			type = "host_create";
+
+
+    			$("#host_error_msg").css("visibility", "hidden").val("");
+    			$("#host_open_err_msg").css("visibility", "hidden").val("");
+    			$("#left_container").removeClass("col-md-12").addClass("col-md-5");
+    			$(".form-control").each(function(){
+					$(this).val("");
+				});
+    			$("#host_container").css("display", "block");
+    			$.ajaxSetup({
+				    crossDomain: false, // obviates need for sameOrigin test
+				    beforeSend: function(xhr, settings) {
+				        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+				    }
+				});
+
+    			event.preventDefault();
+    		});
+
+
+    		/*
+			EVERYTHING BELOW THIS IS FOR THE SUBNET LOCATOR AUTOMATIC GENERATOR
+    		*/
+    		function timeSubmit()
+    		{
+    			/*
+    			Make the autosubmit button as clickable
+    			*/
+    			$("#autosubmit").click(function(){
+    				/*
+    				Gather the form data
+    				*/
+    				var daily = 'false';
+    				if ($("#daily").is(':checked'))
+    					daily = 'true';
+    				else
+    					daily = 'false';
+
+    				var hour = parseInt($("#hour").val());
+    				if (!((0 <= hour) && (hour <= 24)))
+    					return;
+    				var minute = parseInt($("#minute").val());
+    				if (!((0 <= minute) && (minute<=60)))
+    					return;
+
+    				$.ajaxSetup({
+					    crossDomain: false, // obviates need for sameOrigin test
+					    beforeSend: function(xhr, settings) {
+					        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+					    }
+					});
+
+
+    				var url_th = "{% url 'show:admin_page' %}";
+
+    				/*
+    				Post the form Data, with type set to time_submit so that the server knows
+    				it needs to update its crontab
+    				*/
+    				var formData = {
+    					'type' : 'time_submit',
+    					'daily' : daily,
+    					'hour' : hour,
+    					'minute' : minute,
+    					'username' : $("#adminusername").val(),
+    					'password' : $("#adminpassword").val(),
+    				};
+
+    				console.log(formData);
+    				$.ajax({
+						url: url_th,
+						type: "POST",
+						data: formData,
+						success: function(response){
+						},
+					});    			
+				});
+    		}
+
+    		//Make the timesubmit button clickable
+    		timeSubmit();
+
+    	});
+    </script>
+  	<script src="assets/js/jquery.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>	
+</body>
+
+
+</html>

@@ -1,0 +1,9 @@
+show ip int b
+Interface              IP-Address      OK? Method Status                Protocol
+FastEthernet0/0        192.168.128.2   YES NVRAM  up                    up      
+FastEthernet1/0        192.168.56.2    YES NVRAM  up                    up      
+FastEthernet2/0        unassigned      YES NVRAM  administratively down down    
+FastEthernet3/0        unassigned      YES NVRAM  administratively down down    
+FastEthernet4/0        unassigned      YES NVRAM  administratively down down    
+Loopback0              1.1.1.1         YES NVRAM  up                    up      
+cisco1#

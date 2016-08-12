@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css"/>
+
+
+<html lang="en"><head>
+	{% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="/static/jquery/jquery.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="/static/bootstrap-3.3.7-dist/js//bootstrap.min.js"></script>
+	<script src="/static/bootstrap-switch-master/dist/js/bootstrap-switch.min.js"></script>
+	<link rel="stylesheet" href="/static/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.bundle.min.js"></script>
+	<style>
+
+	::-webkit-input-placeholder{
+		font-style: italic;
+	}
+
+	:-moz-placeholder {
+		font-style: italic;
+	}
+
+	::-moz-placeholder {
+		font-style: italic;
+	}
+
+	:-ms-input-placeholder {
+		font-style: italic;
+	}
+
+	.navbar-default .navbar-fixed-top {
+		background-color: #900C3F;
+	}
+
+/*	#hostname {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+	#hostname:focus {
+	    width: 100%;
+	}*/
+
+	.custom_table {
+		height:500px;
+		overflow-y:scroll;
+	}
+
+	.table_success {
+		background-color: rgb(200, 247, 197);
+	}
+
+	.table_success:hover{
+		background-color: rgb(144, 198, 149);
+	}
+
+	.table_one {
+		background-color: rgb(134, 226, 213);
+	}
+
+	.table_one:hover{
+		background-color: rgb(101, 198, 187);
+	}
+
+	.table_two {
+		background-color: rgb(241, 169, 160);
+	}
+
+	.table_two:hover{
+		background-color: rgb(210, 77, 87);
+	}
+
+	</style>
+	<script>
+	/* ============================================================
+	 * bootstrap-dropdown.js v2.0.1
+	 * http://twitter.github.com/bootstrap/javascript.html#dropdowns
+	 * ============================================================
+	 * Copyright 2012 Twitter, Inc.
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 * ============================================================ */
+
+
+	!function( $ ){
+
+	  "use strict"
+
+	 /* DROPDOWN CLASS DEFINITION
+	  * ========================= */
+
+	  var toggle = '[data-toggle="dropdown"]'
+	    , Dropdown = function ( element ) {
+	        var $el = $(element).on('click.dropdown.data-api', this.toggle)
+	        $('html').on('click.dropdown.data-api', function () {
+	          $el.parent().removeClass('open')
+	        })
+	      }
+
+	  Dropdown.prototype = {
+
+	    constructor: Dropdown
+
+	  , toggle: function ( e ) {
+	      var $this = $(this)
+	        , selector = $this.attr('data-target')
+	        , $parent
+	        , isActive
+
+	      if (!selector) {
+	        selector = $this.attr('href')
+	        selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
+	      }
+
+	      $parent = $(selector)
+	      $parent.length || ($parent = $this.parent())
+
+	      isActive = $parent.hasClass('open')
+
+	      clearMenus()
+	      !isActive && $parent.toggleClass('open')
+
+	      return false
+	    }
+
+	  }
+
+	  function clearMenus() {
+	    $(toggle).parent().removeClass('open')
+	  }
+
+
+	  /* DROPDOWN PLUGIN DEFINITION
+	   * ========================== */
+
+	  $.fn.dropdown = function ( option ) {
+	    return this.each(function () {
+	      var $this = $(this)
+	        , data = $this.data('dropdown')
+	      if (!data) $this.data('dropdown', (data = new Dropdown(this)))
+	      if (typeof option == 'string') data[option].call($this)
+	    })
+	  }
+
+	  $.fn.dropdown.Constructor = Dropdown
+
+
+	  /* APPLY TO STANDARD DROPDOWN ELEMENTS
+	   * =================================== */
+
+	  $(function () {
+	    $('html').on('click.dropdown.data-api', clearMenus)
+	    $('body').on('click.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+	  })
+
+	}( window.jQuery );
+	</script>
+
+    <title>Subnet Locator</title>
+
+
+  </head>
+
+  <body>
+	<!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- <a class="navbar-brand" href="#">Networking Webtools</a> -->
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="list.html">Home</a></li>
+<!--             <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li> -->
+            {% if privilege == 'superuser' %}
+            	<li><a href="{% url 'show:admin_page' %}">Admin Page</a></li>
+            {% endif %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'show:show' %}">Output Repository</a></li>
+                <li><a href="{% url 'show:compare_run' %}">Compare Previous Outputs</a></li>
+                <li><a href="{% url 'show:subnet_outputs' %}">Generate Subnet Outputs</a></li>
+                <li><a href="{% url 'show:subnet_compare' %}">Subnet Locator</a></li>
+                <li><a href="{% url 'show:topology_mapper' %}">Topology Mapper</a></li>
+                <li><a href="{% url 'show:ports' %}">Port Utilization</a></li>
+                <!-- <li><a href="#">Subnet Locator</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li> -->
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'show:logout_view' %}">Logout</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    </div>
+    <div class="container">
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron" style="position:relative">
+      	<div id="loadingDiv" style="z-index:10; position:absolute; width:100%; height:100%; top:0; left:0;">
+    			<img src="/static/ajax-loader.gif"/>
+    	</div>
+        <div class="row">
+        	<input type="checkbox" id="toggle-search" checked>
+        </div>
+        <div class="row">
+        	<div class="col-md-12" id="selection_container" style="display:none">
+        		<div class="well" style="margin-top: 40px; margin-left: -20px; margin-right:-20px">
+		        	<h3>Host Selection</h3>
+		        	<select multiple class="form-control" id="hosts_select" size="15">
+		        	{% for hostname in hostnames %}
+		        		<option>{{ hostname }}</option>
+		        	{% endfor %}
+		        	</select>
+		        </div>
+		    	<button type="button" class="btn btn-default" id="graph_submit">Graph Port Utilizations</button>
+		    </div>
+	    	<div class="col-md-12" id="chart_container" style="display:none">
+	    	<button type="button" class="btn btn-default" id="back_button" style="margin-top:30px">Back</button>
+	    		<canvas id="myChart" width="750" height="500"></canvas>
+	    	</div>
+		    
+		</div>
+	    <div class="row beforemap">
+        	<div class="col-md-4">
+		        <div class="well" style="margin-top: 40px; margin-left: -20px; margin-right:-20px">
+		        	<h4>Device Selection</h4>
+		        	<form action = "{% url 'show:ports' %}" method="POST" id="type_selection_form">
+		        	{% csrf_token %}
+					  	
+					  	<fieldset class="form-group">
+					    	<label for="os">OS</label>
+					    	<select class="form-control" id="os">
+					    		<option selected disabled></option>
+					      		<option>IOS</option>
+					      		<option>NXOS</option>
+					      		<option>All</option>
+					    	</select>
+					    	<!-- <small class="text-muted">Pick one choice.</small> -->
+					 	 </fieldset>
+					  	<fieldset class="form-group">
+					    	<label for="function">Function</label>
+					    	<select class="form-control" id="function">
+					    		<option selected disabled></option>
+					      		<option>CORE</option>
+					      		<option>DIST</option>
+					      		<option>ACCESS</option>
+					      		<option>OTV</option>
+					      		<option>WAN</option>
+					      		<option>VXLAN</option>
+					      		<option>All</option>
+					   		</select>
+					  	</fieldset>
+					  	<small class="text-muted" id="selection_err_msg"></small>
+					</form>
+
+
+		        </div>
+		    </div>
+		   	<div class="container">
+			    <div class="col-md-8">
+			    	<div class="well" style="margin-top: 40px; margin-right:-20px">
+			    		<h4>Host Selection</h4>
+			    		<div class="row">
+			    			<div class="input-group">
+				        			<input type="text" class="form-control" id="search_box" placeholder="Search"><span class="input-group-addon glyphicon glyphicon-search" aria-hidden="true"></span>
+				        	</div>
+				        </div>
+				       	<div class="row" style="padding-top:20px">
+				    		<div class="form-group has-feedback">
+				    			
+				        		<div class="col-md-6">
+						    		<fieldset class="form-group">
+								    	<label for="host_list">Host List</label>
+								    	<small class="text-muted">Double click to add</small>
+								    	<select multiple class="form-control" id="host_list" name="hostListSelect">
+							   			</select>
+								    	<!-- <input type="text" class="form-control" id="hostname" placeholder="Enter hostname" list="host_list" autocomplete="off">
+								    	<i class="glyphicon glyphicon-search form-control-feedback"></i>
+								    	<datalist id="host_list">
+								    	</datalist> -->
+								    	<small class="text-muted" id="host_select_err_msg" style="visibility:hidden"></small>
+								  	</fieldset>
+								  	<button type="button" id="all_button">All</button>
+							  	</div>
+							  	<div class="col-md-6">
+							  		<fieldset class="form-group">
+							  		<label for="list-group">Added Hosts</label>
+							  			<ul class="list-group" id="selected_items">
+							  			</ul>
+							  		</fieldset>
+							  	</div>
+							</div>
+						</div>
+		    			<fieldset class="form-group">
+					  		<label for="username">Username</label>
+					  		<input type="text" class="form-control" id="username" placeholder="Username on host">
+					  	</fieldset>
+					  	<fieldset class="form-group">
+						   	 	<label for="password">Password</label>
+						   	 	<input type="password" class="form-control" id="password" placeholder="Router password">
+						</fieldset>
+					  	<button id="host_submit" type="button">Submit</button>
+					  	<!-- <button id="toggle" type="button" data-toggle="button" aria-pressed="false">Open Files</button> -->
+					  	<small class="text-muted" id="error_msg"></small>
+					  	<!-- <input type="checkbox" id="toggle">Open Files -->
+
+			    	</div>
+			    </div>
+		    </div>
+		    
+    	</div>
+       </div>
+    </div>
+
+    <script type='text/javascript'>
+	$(document).ready(function(){
+		var $loading = $('#loadingDiv').hide();
+
+ 		$(document)
+ 			.ajaxStart(function() {
+ 				$loading.show();
+ 			})
+ 			.ajaxStop(function () {
+ 				$loading.hide();
+ 			});
+
+
+
+		function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie != '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = jQuery.trim(cookies[i]);
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+
+		function setupAjax(){
+			$.ajaxSetup({
+			    crossDomain: false, // obviates need for sameOrigin test
+			    beforeSend: function(xhr, settings) {
+			        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+			    }
+			});
+		}
+
+		var form1Data = {
+
+		};
+
+		function ajaxSubmit(){
+			setupAjax();
+			var url_th = "{% url 'show:subnet_outputs' %}";
+
+			$.ajax({
+				url: url_th,
+				type: "POST",
+				data: form1Data,
+				success: function(response){
+					//console.log(response);
+					if ('selection_err' in response)
+					{
+						$("#selection_err_msg").html(response['selection_err']);
+					}
+					else
+					{
+						$("#selection_err_msg").html("");
+						hosts = response['hosts']
+						var host_list_Markup = "";
+						for (var x = 0; x<hosts.length; x++)
+			    		{
+			    			host_list_Markup = host_list_Markup + "<option>" + hosts[x] + "</option>";
+			    		}
+			    		$("#host_list").html(host_list_Markup);
+					}
+					
+				},
+			});
+		}
+
+		var csrftoken = getCookie('csrftoken');
+
+				/*
+		Make the onText of the toggle Switch to Search
+		Make the offText of the toggle Switch to Selection
+		*/
+		$.fn.bootstrapSwitch.defaults.onText = "Generation";
+		$.fn.bootstrapSwitch.defaults.offText = "Graphing";
+
+		/*
+		When the switch is toggled execute this function
+		*/
+		$.fn.bootstrapSwitch.defaults.onSwitchChange = function(event, state){
+			/*
+			If the Search is selected, then make the selection container, dates, container, and table container
+			hidden and the search container visible
+			*/
+			$("#myChart").css('display', 'none');
+
+			setupAjax();
+			var formData = {
+				'type' : 'reload'
+			};
+
+			var url_th = "{% url 'show:ports' %}";
+			$.ajax({
+				url: url_th,
+				type: "POST",
+				data: formData,
+				success: function(response){
+					//console.log(response);
+					var list_names = response['data'];
+					var innerHTML = "";
+					for (var x = 0; x < list_names.length; x++)
+					{
+						innerHTML += innerHTML + "<option>" + list_names[x].trim() + "</option>";
+						$("#host_list").html(innerHTML);
+					}
+				},
+					
+				
+			});
+
+			if ($("#toggle-search").is(':checked'))
+			{
+				$("#selection_container").css('display', 'none');
+				$(".beforemap").css('display', 'block');
+			}
+			/*
+			If Selection is selected then make the search container, dates container, and search details container
+			hidden and make the selection container big and viewable
+			*/
+			else
+			{
+				
+				$("#selection_container").css('display', 'block');
+				$(".beforemap").css('display', 'none');
+			}
+			
+		};
+
+		/*
+		Make the toggle Search checkbox into a bootstrap Switch
+		*/
+		$("#toggle-search").bootstrapSwitch();
+
+
+
+
+
+		$("#os").change(function(){
+			form1Data['os'] = $("#os").val();
+			if (('os' in form1Data) && ('function' in form1Data))
+			{
+				ajaxSubmit();
+			}
+		});
+		$("#function").change(function(){
+			form1Data['function'] = $("#function").val();
+			if (('os' in form1Data) && ('function' in form1Data))
+			{
+				ajaxSubmit();
+			}
+		});
+
+		function makeSubmitButtonClick(){
+			$("#host_submit").click(function(event){
+				var host_items = $("#selected_items").text().trim().split("Delete");
+				var host_items = host_items.slice(0, host_items.length - 1);
+				var url_th = "{% url 'show:ports' %}";
+				var hosts = $("#host_list").val() || [];
+				var host_total = "";
+				for (var x = 0; x < host_items.length; x++){
+					host_total = host_total + host_items[x].trim() + "\n";
+				}
+				var username = $("#username").val();
+				var password = $("#password").val();
+
+				var formData = {
+					'host_lines' : host_total,
+					'username' : username,
+					'password' : password,
+					'type': 'generation',
+				}
+
+				//console.log(formData);
+
+				setupAjax();
+				$.ajax({
+					url: url_th,
+					type: "POST",
+					data: formData,
+					success: function(response){
+						//console.log(response);
+						//console.log(response);
+						if ('error' in response){
+							var err_msg = response['error'];
+							$("#error_msg").html(err_msg);
+						}
+						
+					},
+				});
+				event.preventDefault();
+			});
+		}
+
+		function makeSearchBox(){
+			$("#search_box").keyup(function(event){
+				var search_box_val = $("#search_box").val();
+				//console.log(search_box_val);
+				var host_list_Markup = "";
+				for (var x = 0; x < hosts.length; x++)
+				{
+					if ((hosts[x].search(search_box_val) != -1))
+					{
+						host_list_Markup += "<option>" + hosts[x] + "</option>";
+					}
+				}
+				$("#host_list").html(host_list_Markup);
+			});
+		}
+		function dbClick(){
+			current_html = $("#selected_items").html();
+				var add_HTML = "";
+				$("#host_list option:selected").each(function () {
+					var hostname = $(this).text()
+					add_HTML = '<li class="list-group-item host_item ">' + hostname + '<span class="pull-right host_delete">Delete</span></li>';
+					if (current_html.search(hostname) == -1)
+					{
+						current_html += add_HTML;
+					}
+				});
+		}
+		function makeOptionClick(){
+			$("select").dblclick(function() 
+			{
+				current_html = $("#selected_items").html();
+				var add_HTML = "";
+				$("#host_list option:selected").each(function () {
+					var hostname = $(this).text()
+					add_HTML = '<li class="list-group-item host_item ">' + hostname + '<span class="pull-right host_delete">Delete</span></li>';
+					if (current_html.search(hostname) == -1)
+					{
+						current_html += add_HTML;
+					}
+			    	
+			  	});
+			  	$("#selected_items").html(current_html);
+			}
+			)
+			.trigger('change');
+				// console.log("dblclicked");
+				// add_HTML = '<li class="list-group-item host_item ">' + (event.target).html() + '<span class="pull-right host_delete">Delete</span></li>';
+				// current_html = $("#selected_items").html();
+				// current_html += add_HTML;
+				// $("#selected_items").html(current_html);
+		}
+
+		function makeListDeleteClick(){
+			$(document).on('click', '.host_delete', function(){
+				$(this).parent().remove();
+			});
+		}
+
+		function makeAllButtonClick(){
+			$("#all_button").click(function(){
+				$("#host_list option").prop('selected', 'selected');
+				current_html = $("#selected_items").html();
+				$("#host_list option:selected").each(function() {
+					hostname = $(this).text();
+					if (current_html.search(hostname)== -1)
+					{
+						add_HTML = '<li class="list-group-item host_item ">' + hostname + '<span class="pull-right host_delete">Delete</span></li>';
+						current_html += add_HTML;
+					}
+				$("#selected_items").html(current_html);
+				});
+			});
+		}
+
+		makeSubmitButtonClick();
+		makeSearchBox();
+		makeOptionClick();
+		makeListDeleteClick();
+		makeAllButtonClick();
+
+
+		function makeBackButton(){
+			$("#back_button").click(function(event){
+				$("#myChart").html("");
+				$("#chart_container").css('display', 'none')
+				$("#selection_container").css('display', 'block')
+
+
+				event.preventDefault();
+			});
+		}
+
+		makeBackButton();
+
+		function makeGraph(data){
+			var ctx= document.getElementById("myChart");
+			var myChart = new Chart(ctx, {
+				type: 'line',
+				data: data,
+				
+			});
+		}
+
+		function makeGraphSubmitButton(){
+			$("#graph_submit").click(function(){
+				setupAjax();
+
+				var hosts = $("#hosts_select").val() || [];
+				var host_total = "";
+				for (var x = 0; x < hosts.length; x++){
+					host_total = host_total + hosts[x].trim() + "\n";
+				}
+
+				var formData = {
+					'type' : 'selection',
+					'host_lines': host_total,
+				};
+
+				var url_th = "{% url 'show:ports' %}";
+				$.ajax({
+					url: url_th,
+					type: "POST",
+					data: formData,
+					success: function(response){
+						//console.log(response);
+						//console.log(response);
+						if ('error' in response){
+							var err_msg = response['error'];
+							$("#error_msg").html(err_msg);
+						}
+						else
+						{
+							data = JSON.parse(response['data']);
+							console.log(data);
+							$("#chart_container").css('display', 'block');
+							$("#myChart").css('display', 'block');
+							$("#selection_container").css('display', 'none');
+							makeGraph(data);
+						}
+						
+					},
+				});
+				event.preventDefault();
+			})
+		}
+
+		makeGraphSubmitButton();
+
+	});
+	</script>
+  	<script src="assets/js/jquery.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>	
+</body>
+
+
+<!-- <script type='text/javascript'>
+	function submitForm(){
+		console.log("Logged");
+		var formData = {
+				'hostname' : $(#hostname).val(),
+				'password' : $(#password).val(),
+				'type' : $(#type).val(),
+
+			};
+			console.log(formData);
+
+			$.ajax({
+				type: 'POST',
+				url: "{% url 'show:show'}",
+				contentType: 'application/json; charset=utf-8',
+				data: $.toJSON(formData),
+				dataType: 'text',
+			})
+				.done(function(data) {
+					console.log(data);
+
+
+				});
+
+			event.preventDefault();
+	}
+</script> -->
+
+
+</html>

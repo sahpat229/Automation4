@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<script type="text/javascript"
+ src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js">
+</script>
+	{% load static %}
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="/static/jquery/jquery.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="/static/bootstrap-3.3.7-dist/js//bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css"/>
+
+<style>
+
+.login_title{
+	text-align: center;
+}
+
+.form_input_left{
+	position:absolute;
+	right: 30px;
+	margin-top: 200px;
+}
+
+.form_input_right{
+	position:absolute;
+	left: 30px;
+	margin-top: 200px;
+}
+
+.form_div{
+	position:relative;
+}
+
+.form_inputs{
+	border-color: #b3ecff
+	border-radius: 4px;
+	border-width: 3px;
+}
+
+.content{
+	height:250px;
+}
+
+</style>
+
+<html>
+	<head>
+		<title>Login Page</title>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row" style="background-color: #b30000">
+					<h3 class="login_title">Networking Login Portal</h3>
+			</div>
+			<div class="row" style="height:10px; background-color:#000000">
+			</div>
+			{% if error_msg %}
+				<div class="row" style="height:40px;">
+					<p>{{ error_msg }}</p>
+				</div>
+			{% endif %}
+			<div class="row content">
+				<form action="{% url 'show:index' %}" method="post">
+				{% csrf_token %}
+					<div class="col-md-6 form_div">
+						<div class="form_input_left">
+							<input type="text" class="form-control form_inputs" name="username" placeholder="Username: " />
+							<input type="text" style="display:none" value="True" name="bool" />
+						</div>
+					</div>
+					<div class="col-md-6 form_div">
+						<div class="form_input_right">
+							<input type="password" class="form-control form_inputs" name="password" placeholder="Password: "/>
+						</div>
+					</div>
+					<button type="submit" style="display:none" id="login_submit"></button>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-md-12" style="text-align:center">
+					<button class="btn btn-default" onclick="clickFunction()" style="text-align:center">Login</button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script type='text/javascript'>
+		function clickFunction() {
+			document.getElementById("login_submit").click();
+		}	
+	</script>
+</html>

@@ -1,0 +1,7 @@
+term length 0
+cisco1#
+show ip int b | include up
+FastEthernet0/0        192.168.128.2   YES NVRAM  up                    up      
+FastEthernet1/0        192.168.56.2    YES NVRAM  up                    up      
+Loopback0              1.1.1.1         YES NVRAM  up                    up      
+cisco1#
